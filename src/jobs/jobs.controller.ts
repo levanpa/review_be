@@ -17,17 +17,17 @@ export class JobsController {
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.jobsService.findOne(+id)
+  findOne(@Param('id') id: number) {
+    return this.jobsService.findOne(id)
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() job: jobDto) {
-    return this.jobsService.update(+id, job)
+  update(@Param('id') id: number, @Body() job: jobDto) {
+    return this.jobsService.update(id, job)
   }
 
   @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.jobsService.remove(+id)
+  remove(@Param('id') id: number) {
+    return this.jobsService.remove(id)
   }
 }

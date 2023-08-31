@@ -1,6 +1,5 @@
 export type reviewDto = {
   id: number,
-  name: string,
   content: string,
   like: number,
   dislike: number,
@@ -21,4 +20,24 @@ export type categoryDto = {
   name: string,
   job_counter: number,
   created?: number,
+}
+export type dbQueryDto = {
+  select: {}
+  where: {}
+  order: {}
+}
+export type queryRequestDto = {
+  type: string,
+  options?: dbQueryDto,
+  data?: reviewDto
+}
+export type userDto = {
+  id: string,
+  name: string,
+  email: string,
+  password: string,
+  created?: number,
+}
+export type authDto = {
+
 }

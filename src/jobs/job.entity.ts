@@ -1,12 +1,14 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm'
+import { Column, Entity, PrimaryGeneratedColumn, OneToMany, ManyToOne } from 'typeorm'
+import { Review } from '../reviews/review.entity'
+import { User } from '../users/users.entity'
 
 @Entity()
 export class Job {
   @PrimaryGeneratedColumn()
   id: number
 
-  @Column()
-  job_id: string
+  @Column() // redundant?
+  user_id: string
 
   @Column()
   name: string
@@ -25,5 +27,11 @@ export class Job {
 
   @Column({ type: 'bigint', width: 14 })
   created: number
+
+  @OneToMany(() => Review, review => review.job)
+  reviews: Review[]
+
+  @ManyToOne(() => User, user => user.jobs)
+  user: User
 
 }

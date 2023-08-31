@@ -5,7 +5,6 @@ import { InjectRepository } from '@nestjs/typeorm'
 import { Repository } from 'typeorm'
 import { UpdateResult, DeleteResult } from 'typeorm'
 
-
 @Injectable()
 export class JobsService {
   constructor(
@@ -13,16 +12,16 @@ export class JobsService {
     private readonly jobRepo: Repository<Job>,
   ) { }
 
-  create(job: jobDto) {
-    return 'This action adds a new job'
+  async create(job: any) {
+    return await this.jobRepo.save(job)
   }
 
   async findAll(): Promise<Job[]> {
     return await this.jobRepo.find()
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} job`
+  async findOne(id: number): Promise<Job> {
+    return await this.jobRepo.findOneBy({ id })
   }
 
   update(id: number, data: jobDto) {

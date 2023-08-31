@@ -1,4 +1,4 @@
-
+--- notes
 
 
 
@@ -6,3 +6,25 @@
 - init project
 - install typeorm
 - init jobs api
+nest g resource jobs
+- init reviews api
+nest g resource reviews
+- init users api
+nest g resource users
+- init auth api
+nest g resource auth
+- install bcrypt to encode password
+npm i bcryptjs
+
+
+
+--- config hot reload
+npm i --save-dev webpack-node-externals run-script-webpack-plugin webpack
+- create webpack-hmr.config.js
+- add to main.ts
+if (module.hot) {
+  module.hot.accept()
+  module.hot.dispose(() => app.close())
+}
+- add to package.json
+"start:dev": "nest build --webpack --webpackPath webpack-hmr.config.js --watch"
