@@ -16,13 +16,20 @@ export class User {
   @Column()
   password: string
 
+  /**
+  0: guest
+  1: root
+  2: admin
+  **/
+  @Column()
+  role: number
+
   @Column({ type: 'bigint', width: 14 })
   created: number
 
-  @OneToMany(() => Job, job => job.user)
+  @OneToMany(() => Job, (job) => job.user)
   jobs: Job[]
 
-  @OneToMany(() => Review, review => review.user)
+  @OneToMany(() => Review, (review) => review.user)
   reviews: Review[]
-
 }

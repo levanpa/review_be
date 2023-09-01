@@ -15,6 +15,9 @@ nest g resource users
 nest g resource auth
 - install bcrypt to encode password
 npm i bcryptjs
+- install jwt to authenticate user
+npm i --save @nestjs/jwt
+
 
 
 
