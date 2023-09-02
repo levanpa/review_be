@@ -37,6 +37,8 @@ export type userDto = {
   email: string
   password: string
   role: number
+  review_counter: number
+  vote_counter: number
   created?: number
 }
 export type authDto = {}

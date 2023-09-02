@@ -17,12 +17,18 @@ export class User {
   password: string
 
   /**
-  0: guest
+  0: user
   1: root
   2: admin
   **/
   @Column()
   role: number
+
+  @Column()
+  review_counter: number
+
+  @Column()
+  vote_counter: number
 
   @Column({ type: 'bigint', width: 14 })
   created: number

@@ -25,9 +25,13 @@ export class AuthService {
   async login(data: { email: string; password: string }) {
     let user = await this.usersService.findOne({ email: data.email })
     if (user?.id && this.comparePassword(data.password, user.password)) {
-      // todo: login ok thi tra ve token va user
       let token = await this.generateToken(user)
-      return 'login ok: ' + token
+      return {
+        statusCode: HttpStatus.OK,
+        message: 'login successfully',
+        token,
+        user,
+      }
     }
     return {
       statusCode: HttpStatus.NOT_FOUND,
