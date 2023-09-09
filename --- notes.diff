@@ -17,6 +17,12 @@ nest g resource auth
 npm i bcryptjs
 - install jwt to authenticate user
 npm i --save @nestjs/jwt
+- setting up session
+npm i express-session
+npm i -D @types/express-session
+- setting up cookie
+npm i cookie-parser
+npm i -D @types/cookie-parser
 
 
 
@@ -31,3 +37,9 @@ if (module.hot) {
 }
 - add to package.json
 "start:dev": "nest build --webpack --webpackPath webpack-hmr.config.js --watch"
+
+
+# todo: prevent refresh page clear all data in pinia store
+https://www.vuemastery.com/blog/refresh-proof-your-pinia-stores/
+
+# todo: session management on server

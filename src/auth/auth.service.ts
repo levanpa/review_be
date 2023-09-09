@@ -4,6 +4,10 @@ import { UsersService } from 'src/users/users.service'
 import * as bcrypt from 'bcryptjs'
 import { JwtService } from '@nestjs/jwt'
 import { userDto } from 'src/dto'
+import type {
+  Request as expressRequest,
+  Response as expressResponse,
+} from 'express'
 
 @Injectable()
 export class AuthService {
@@ -22,21 +26,27 @@ export class AuthService {
     return await this.usersService.create(user)
   }
 
-  async login(data: { email: string; password: string }) {
+  async login(
+    data: { email: string; password: string },
+    req: expressRequest,
+    res: expressResponse,
+  ) {
     let user = await this.usersService.findOne({ email: data.email })
     if (user?.id && this.comparePassword(data.password, user.password)) {
       let token = await this.generateToken(user)
-      return {
+      user.password = ''
+
+      res.send({
         statusCode: HttpStatus.OK,
-        message: 'login successfully',
-        token,
+        message: 'Login successfully',
         user,
-      }
-    }
-    return {
-      statusCode: HttpStatus.NOT_FOUND,
-      message: 'User not found',
-      token: null,
+        token,
+      })
+    } else {
+      res.send({
+        statusCode: HttpStatus.NOT_FOUND,
+        message: 'User not found',
+      })
     }
   }
 

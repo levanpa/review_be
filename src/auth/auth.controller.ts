@@ -7,10 +7,23 @@ import {
   HttpStatus,
   Request,
   UseGuards,
+  Req,
+  Res,
 } from '@nestjs/common'
 import { AuthService } from './auth.service'
 import { AuthGuard } from './auth.guard'
 import { userDto } from 'src/dto'
+import type {
+  Request as expressRequest,
+  Response as expressResponse,
+} from 'express'
+
+declare module 'express-session' {
+  interface SessionData {
+    ssid: string
+    authenticated: boolean
+  }
+}
 
 @Controller('auth')
 export class AuthController {
@@ -21,10 +34,13 @@ export class AuthController {
     return this.authService.register(data)
   }
 
-  // @HttpCode(HttpStatus.OK)
   @Post('login')
-  login(@Body() data: { email: string; password: string }) {
-    return this.authService.login(data)
+  login(
+    @Body() data: { email: string; password: string },
+    @Req() req: expressRequest,
+    @Res({ passthrough: true }) res: expressResponse,
+  ) {
+    return this.authService.login(data, req, res)
   }
 
   @UseGuards(AuthGuard)
