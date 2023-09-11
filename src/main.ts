@@ -7,7 +7,10 @@ declare const module: any
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule)
-  app.enableCors()
+  app.enableCors({
+    credentials: true,
+    origin: 'http://localhost:5173',
+  })
   app.use(
     session({
       secret: 'session-dev',

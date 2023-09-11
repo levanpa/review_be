@@ -35,12 +35,15 @@ export class AuthService {
     if (user?.id && this.comparePassword(data.password, user.password)) {
       let token = await this.generateToken(user)
       user.password = ''
-
+      res.cookie('token', 'Bearer ' + token, { httpOnly: true, secure: true })
+      // split token
+      // const [token1, token2, token3] = token.split('.')
+      // res.cookie('token', token1 + '.' + token2)
+      // res.cookie('securedToken', 'Bearer ' + token3, { httpOnly: true, secure: true })
       res.send({
         statusCode: HttpStatus.OK,
         message: 'Login successfully',
         user,
-        token,
       })
     } else {
       res.send({

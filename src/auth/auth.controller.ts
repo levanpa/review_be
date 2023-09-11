@@ -44,8 +44,9 @@ export class AuthController {
   }
 
   @UseGuards(AuthGuard)
-  @Get('profile')
-  getProfile(@Request() req) {
-    return req.user
+  @Get('me')
+  getProfile(@Req() req: expressRequest) {
+    // console.log('cookies', req.cookies)
+    return 'req.secret'
   }
 }
