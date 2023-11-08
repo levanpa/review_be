@@ -1,19 +1,21 @@
 export type reviewDto = {
   id: number
   content: string
+  location: string
   like: number
   dislike: number
-  job_id: string
+  experience?: number
   created?: number
+  [key: string]: any
 }
 export type jobDto = {
   id: number
   name: string
   img: string
-  review_counter: number
-  location: string
   category: string
+  review_counter: number
   created?: number
+  is_public?: boolean
 }
 export type categoryDto = {
   id: number
@@ -22,9 +24,9 @@ export type categoryDto = {
   created?: number
 }
 export type dbQueryDto = {
-  select: {}
-  where: {}
-  order: {}
+  select?: {}
+  where?: {}
+  order?: {}
 }
 export type queryRequestDto = {
   type: string

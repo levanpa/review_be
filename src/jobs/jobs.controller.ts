@@ -1,12 +1,20 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common'
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+} from '@nestjs/common'
 import { JobsService } from './jobs.service'
 import { jobDto } from '../dto'
 
 @Controller('jobs')
 export class JobsController {
-  constructor(private readonly jobsService: JobsService) { }
+  constructor(private readonly jobsService: JobsService) {}
 
-  @Post()
+  @Post('/add')
   create(@Body() job: jobDto) {
     return this.jobsService.create(job)
   }

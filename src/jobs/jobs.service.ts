@@ -10,10 +10,18 @@ export class JobsService {
   constructor(
     @InjectRepository(Job)
     private readonly jobRepo: Repository<Job>,
-  ) { }
+  ) {}
 
   async create(job: any) {
-    return await this.jobRepo.save(job)
+    let newJob = new Job()
+    newJob.name = job.name
+    newJob.img = job.img
+    newJob.category = job.category
+    newJob.review_counter = job.review_counter
+    newJob.is_public = job.is_public
+    newJob.created = Date.now()
+
+    return await this.jobRepo.save(newJob)
   }
 
   async findAll(): Promise<Job[]> {

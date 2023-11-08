@@ -17,9 +17,10 @@ export class User {
   password: string
 
   /**
-  0: user
+  0: guest
   1: root
   2: admin
+  3: user
   **/
   @Column()
   role: number

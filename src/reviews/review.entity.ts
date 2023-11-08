@@ -7,11 +7,8 @@ export class Review {
   @PrimaryGeneratedColumn()
   id: number
 
-  @Column() // redundant?
-  job_id: string
-
-  @Column() // redundant?
-  user_id: string
+  @Column()
+  name: string
 
   @Column({ type: 'mediumtext' })
   content: string
@@ -22,13 +19,18 @@ export class Review {
   @Column()
   dislike: number
 
+  @Column()
+  experience: number
+
+  @Column()
+  location: string
+
   @Column({ type: 'bigint', width: 14 })
   created: number
 
-  @ManyToOne(() => Job, job => job.reviews)
+  @ManyToOne(() => Job, (job) => job.reviews)
   job: Job
 
-  @ManyToOne(() => User, user => user.reviews)
+  @ManyToOne(() => User, (user) => user.reviews)
   user: User
-
 }

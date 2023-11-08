@@ -1,28 +1,48 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common'
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+  Query,
+  UseGuards,
+  Req,
+} from '@nestjs/common'
 import { ReviewsService } from './reviews.service'
-import { reviewDto, queryRequestDto } from '../dto'
+import { reviewDto, dbQueryDto } from '../dto'
+import { AuthGuard } from 'src/auth/auth.guard'
+import type {
+  Request as expressRequest,
+  Response as expressResponse,
+} from 'express'
 
 @Controller('reviews')
 export class ReviewsController {
-  constructor(private readonly reviewsService: ReviewsService) { }
+  constructor(private readonly reviewsService: ReviewsService) {}
 
-  @Post()
-  create(@Body() request: queryRequestDto) {
-    if (request?.type === 'query') {
-      return this.reviewsService.filter(request.options)
-    } else {
-      return this.reviewsService.create(request.data)
-    }
+  @Post('/add')
+  @UseGuards(AuthGuard)
+  create(@Req() req: expressRequest, @Body() data: any) {
+    return this.reviewsService.create(data.reviewData, data.job)
   }
 
   @Get()
   findAll() {
+    console.log('go to findAll')
     return this.reviewsService.findAll()
   }
 
   @Get(':id')
   findOne(@Param('id') id: number) {
+    console.log('go to findOne', id)
     return this.reviewsService.findOne(id)
+  }
+
+  @Post()
+  findSome(@Body() query: any) {
+    return this.reviewsService.findAll(query.data)
   }
 
   @Patch(':id')

@@ -27,6 +27,13 @@ npm i -D @types/cookie-parser
 
 
 
+--- todo:
+- refresh token
+- split token
+
+
+
+
 --- config hot reload
 npm i --save-dev webpack-node-externals run-script-webpack-plugin webpack
 - create webpack-hmr.config.js
@@ -38,8 +45,4 @@ if (module.hot) {
 - add to package.json
 "start:dev": "nest build --webpack --webpackPath webpack-hmr.config.js --watch"
 
-
-# todo: prevent refresh page clear all data in pinia store
-https://www.vuemastery.com/blog/refresh-proof-your-pinia-stores/
-
-# todo: session management on server
+# todo: separate findSome and create

@@ -20,7 +20,7 @@ export class AuthService {
     let user = new User()
     user.name = data.name
     user.email = data.email
-    user.role = data.role ?? 0
+    user.role = data.role ?? 3
     user.password = this.encodePassword(data.password)
     user.created = Date.now()
     return await this.usersService.create(user)
@@ -35,7 +35,10 @@ export class AuthService {
     if (user?.id && this.comparePassword(data.password, user.password)) {
       let token = await this.generateToken(user)
       user.password = ''
-      res.cookie('token', 'Bearer ' + token, { httpOnly: true, secure: true })
+      res.cookie('token', 'Bearer ' + token, {
+        httpOnly: true,
+        // secure: true, // use if have SSL
+      })
       // split token
       // const [token1, token2, token3] = token.split('.')
       // res.cookie('token', token1 + '.' + token2)
