@@ -25,7 +25,13 @@ export class ReviewsController {
   @Post('/add')
   @UseGuards(AuthGuard)
   create(@Req() req: expressRequest, @Body() data: any) {
-    return this.reviewsService.create(data.reviewData, data.job)
+    return this.reviewsService.create(data.reviewData, data.userId, data.jobId)
+  }
+
+  @Post('/add-all')
+  @UseGuards(AuthGuard)
+  createAll(@Req() req: expressRequest, @Body() data: any) {
+    return this.reviewsService.createAll(data.reviewData, data.user, data.job)
   }
 
   @Get()

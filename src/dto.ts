@@ -37,7 +37,7 @@ export type userDto = {
   id: number
   name: string
   email: string
-  password: string
+  password?: string
   role: number
   review_counter: number
   vote_counter: number

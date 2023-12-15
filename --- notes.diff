@@ -46,3 +46,4 @@ if (module.hot) {
 "start:dev": "nest build --webpack --webpackPath webpack-hmr.config.js --watch"
 
 # todo: separate findSome and create
+# doing: save userId and jobId in review table
